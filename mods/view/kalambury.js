@@ -1,21 +1,12 @@
 if (Meteor.isClient) {
     Template.panelBody.onRendered(function () {
-        function randomNumber(from, to) {
-            return from + Math.round(Math.random() * (to - from));
-        }
-
-        function randomColor() {
-            // rgb(r, g, b)
-            var r = randomNumber(0, 255);
-            var g = randomNumber(0, 255);
-            var b = randomNumber(0, 255);
-            return 'rgb(' + r + ', '+ g + ', ' + b + ')';
-        }
+        
 
         function draw(x, y) {
             Points.insert({
-                x: x,
-                y: y
+                x: x, 
+                y: y,
+                color: Session.get("color") || "rgb(0,0,0)"
             });
         }
 
@@ -53,7 +44,7 @@ if (Meteor.isClient) {
             Points.find().map(function (point) {
                 context.beginPath();
                 context.arc(point.x, point.y, 2, 0, 2 * Math.PI);
-                context.fillStyle = randomColor();
+                context.fillStyle = point.color;
                 context.fill();
             });
         });
