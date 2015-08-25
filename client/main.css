@@ -5,3 +5,8 @@ canvas {
     height: 600px;
     display: block;
 }
+
+.chat-list {
+    height: 600px;
+    overflow-y: auto;
+}
