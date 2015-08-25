@@ -16,37 +16,34 @@ Points.after.insert(drawAll);
 Points.after.remove(drawAll);
 Points.after.update(drawAll);
 
-window.addEventListener('DOMContentLoaded', function () {
-    var canvas  = document.querySelector('canvas');
-    var context = canvas.getContext('2d');
+$(function () {
+    var $canvas = $('canvas');
+    var context = $canvas.get(0).getContext('2d');
 
+    var offset = $canvas.offset();
     var isPainting = false;
 
-    window.addEventListener('contextmenu', function (event) {
-        Meteor.call('clear');
-        event.preventDefault();
-    });
+    $(window)
+        .resize(function () {
+            offset = $canvas.offset();
+        })
+        .on('contextmenu', function (event) {
+            Meteor.call('clear');
+            event.preventDefault();
+        });
 
-    canvas.addEventListener('mouseup', function () {
-        isPainting = false;
-    });
-
-    canvas.addEventListener('mousedown', function (event) {
-        isPainting = true;
-    });
-
-    canvas.addEventListener('mousemove', function (event) {
-        if (isPainting) {
-            var mousex = event.pageX - this.offsetLeft;
-            var mousey = event.pageY - this.offsetTop;
-
-            draw(mousex, mousey);
-        }
-    });
-
-    canvas.addEventListener('mouseleave', function () {
-        isPainting = false;
-    });
+    $canvas
+        .mouseup   (function () {isPainting = false;})
+        .mousedown (function () {isPainting = true;})
+        .mouseleave(function () {isPainting = false;})
+        .mousemove(function (event) {
+            if (isPainting) {
+                draw(
+                    event.pageX - offset.left,
+                    event.pageY - offset.top
+                );
+            }
+        });
 
     __draw = function () {
         context.clearRect(0, 0, 600, 600);
