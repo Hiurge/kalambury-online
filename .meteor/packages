@@ -8,3 +8,4 @@ meteor-platform
 autopublish
 insecure
 matb33:collection-hooks
+accounts-password
