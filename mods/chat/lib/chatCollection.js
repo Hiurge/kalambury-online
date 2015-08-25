@@ -7,8 +7,9 @@ Chat.setSchema(new SimpleSchema({
 
 Chat.helpers(
 {
-	getUser: function()
+	getEmail: function()
 	{
-		return UniUsers.findOne(this.user_id);
+		var user = UniUsers.findOne(this.user_id);
+		return user && user.getFirstEmailAddress();
 	}
 });
