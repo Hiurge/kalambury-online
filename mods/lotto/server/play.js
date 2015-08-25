@@ -10,6 +10,7 @@ var run = function () {
         if (users.length) {
             user = users[_.random(0, users.length - 1)];
             user.update({$set: {isActive: true}});
+            console.log('Active user ', user.getFirstEmailAddress());
             lastUserId = user._id;
             return;
         }
@@ -18,6 +19,7 @@ var run = function () {
 
     if (lastUserId === user._id) {
         user.update({$set: {isActive: true}});
+        console.log('Active user ', user.getFirstEmailAddress());
         run();
     }
     lastUserId = user._id;
@@ -37,12 +39,14 @@ var clear = function() {
 Meteor.users.find({'status.online': true}, {fields: {status: 1}}).observe({
     added: function(){
         if(!UniUsers.find({isActive: true}).count()){
+            console.log('Add first active ', user.getFirstEmailAddress());
             clear();
         }
     },
     removed: function (id) {
         var user = UniUsers.findOne({isActive: true});
         if(user && user._id === id) {
+            console.log('Remove active ', user.getFirstEmailAddress());
             clear();
         }
     }
