@@ -28,7 +28,7 @@ $(function () {
             offset = $canvas.offset();
         })
         .on('contextmenu', function (event) {
-            Meteor.call('clear');
+            Points.call('clear');
             event.preventDefault();
         });
 
@@ -39,8 +39,8 @@ $(function () {
         .mousemove(function (event) {
             if (isPainting) {
                 draw(
-                    event.pageX - offset.left,
-                    event.pageY - offset.top
+                    Math.round(event.pageX - offset.left),
+                    Math.round(event.pageY - offset.top)
                 );
             }
         });
