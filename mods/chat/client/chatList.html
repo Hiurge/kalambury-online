@@ -1,9 +1,10 @@
 <template name="chatList">
     <div class="chat-list">
+        <h3>Chat</h3>
         <ul class="list-group">
-
-                {{> chatItem}}
-
+            {{#each chatItems}}
+                <li><b>{{getEmail}}</b> - {{message}}</li>
+            {{/each}}
         </ul>
     </div>
 </template>

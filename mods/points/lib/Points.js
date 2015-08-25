@@ -6,9 +6,15 @@ Points.setSchema({
 });
 
 Points.allow({
-    insert: function () {return true;},
-    remove: function () {return true;},
-    update: function () {return true;},
+    insert: function (userId) {
+        return userId && UniUsers.getLoggedIn().isActive;
+    },
+    remove: function (userId) {
+        return userId && UniUsers.getLoggedIn().isActive;
+    },
+    update: function (userId) {
+        return userId && UniUsers.getLoggedIn().isActive;
+    }
 });
 
 if (!Meteor.isServer) {
