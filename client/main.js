@@ -22,8 +22,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     var isPainting = false;
 
-    context.fillStyle = 'black';
-
     window.addEventListener('contextmenu', function (event) {
         Meteor.call('clear');
         event.preventDefault();
@@ -55,7 +53,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
         Points.find().map(function (point) {
             context.beginPath();
-            context.arc(point.x, point.y, 2, 0, 2 * Math.PI, false);
+            context.arc(point.x, point.y, 2, 0, 2 * Math.PI);
+            context.fillStyle = 'black';
             context.fill();
         });
     };
