@@ -9,7 +9,7 @@ var run = function () {
         var users = UniUsers.find({'status.online': true}).fetch() || [];
         if (users.length) {
             user = users[_.random(0, users.length - 1)];
-            UniUsers.update({$set: {isActive: true}});
+            user.update({$set: {isActive: true}});
             lastUserId = user._id;
             return;
         }
