@@ -8,8 +8,9 @@ var run = function () {
     if (!user) {
         var users = UniUsers.find({'status.online': true}).fetch() || [];
         if ( users.length ) {
-            var lenght = users.length - 1;
-            user = users[lenght ? _.random(0, lenght): 0];
+            var length = users.length - 1;
+            user = users[length ? _.random(0, length): 0];
+            Points.call('clear');
             user.update({$set: {isActive: true}});
             console.log('Active user ', user.getFirstEmailAddress());
             lastUserId = user._id;
@@ -40,11 +41,10 @@ var clear = function() {
     id = Meteor.setInterval(run, ROUND_TIME);
 };
 
-
 Meteor.users.find({'status.online': true}, {fields: {status: 1}}).observe({
     added: function(){
         if(!UniUsers.find({isActive: true}).count()){
-            console.log('Add first active ', user.getFirstEmailAddress());
+            console.log('Add first active', user.getFirstEmailAddress());
             clear();
         }
     },

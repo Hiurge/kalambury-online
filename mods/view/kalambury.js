@@ -15,7 +15,8 @@ if (Meteor.isClient) {
         function draw(x, y) {
             Points.insert({
                 x: x,
-                y: y
+                y: y,
+                fillStyle: randomColor()
             });
         }
 
@@ -24,15 +25,6 @@ if (Meteor.isClient) {
 
         var offset = $canvas.offset();
         var isPainting = false;
-
-        $(window)
-            .resize(function () {
-                offset = $canvas.offset();
-            })
-            .on('contextmenu', function (event) {
-                Points.call('clear');
-                event.preventDefault();
-            });
 
         $canvas
             .mouseup   (function () {isPainting = false;})
@@ -53,7 +45,7 @@ if (Meteor.isClient) {
             Points.find().map(function (point) {
                 context.beginPath();
                 context.arc(point.x, point.y, 2, 0, 2 * Math.PI);
-                context.fillStyle = randomColor();
+                context.fillStyle = point.fillStyle;
                 context.fill();
             });
         });
