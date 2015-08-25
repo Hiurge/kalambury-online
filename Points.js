@@ -1,15 +1,22 @@
-Points = new Meteor.Collection('points');
+Points = new UniCollection('points');
+
+Points.setSchema({
+    x: {type: Number},
+    y: {type: Number}
+});
+
+Points.methods({
+    clear: function () {
+        Points.remove({});
+    }
+});
 
 Points.allow({
     insert: function () {return true;},
     remove: function () {return true;},
-    update: function () {return true;}
-});
+    update: function () {return true;},
 
-Meteor.methods({
-    clear: function () {
-        Points.remove({});
-    }
+    clear: function () {return true;}
 });
 
 if (Meteor.isServer) {

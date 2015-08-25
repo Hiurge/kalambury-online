@@ -11,6 +11,7 @@ canvas {
     overflow-y: auto;
 }
 
+
 #chatField {
     margin-top: 10px;
 }
@@ -23,4 +24,9 @@ canvas {
 
 #login-buttons {
     float: right;
+}
+
+.text-center {
+    text-align: center;
+
 }
