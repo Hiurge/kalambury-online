@@ -39,8 +39,8 @@ $(function () {
         .mousemove(function (event) {
             if (isPainting) {
                 draw(
-                    event.pageX - offset.left,
-                    event.pageY - offset.top
+                    Math.round(event.pageX - offset.left),
+                    Math.round(event.pageY - offset.top)
                 );
             }
         });
