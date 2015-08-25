@@ -7,7 +7,7 @@ var run = function () {
     var user = UniUsers.findOne({isActive: true});
     if (!user) {
         var users = UniUsers.find({'status.online': true}).fetch() || [];
-        if (users.length) {
+        if ( users.length ) {
             var lenght = users.length - 1;
             user = users[lenght ? _.random(0, lenght): 0];
             user.update({$set: {isActive: true}});
@@ -19,8 +19,8 @@ var run = function () {
     }
 
     if (lastUserId === user._id) {
-        user.update({$set: {isActive: true}});
-        console.log('Active user ', user.getFirstEmailAddress());
+        user.update({$set: {isActive: false}});
+        console.log('End active ', user.getFirstEmailAddress());
         run();
     }
     lastUserId = user._id;
@@ -28,9 +28,13 @@ var run = function () {
 
 run();
 
-var id = Meteor.setInterval(run, ROUND_TIME);
+var id = Meteor.setInterval(function(){
+    console.log('next', ROUND_TIME);
+    run();
+}, ROUND_TIME);
 
 var clear = function() {
+    lastUserId = null;
     Meteor.clearInterval(id);
     run();
     id = Meteor.setInterval(run, ROUND_TIME);
