@@ -7,15 +7,14 @@ function draw(x, y) {
     });
 }
 
-var drawAll;
+var __draw;
+var drawAll = function () {
+    __draw && __draw();
+};
 
-Points.after.insert(function () {
-    drawAll && drawAll();
-});
-
-Points.after.remove(function () {
-    drawAll && drawAll();
-});
+Points.after.insert(drawAll);
+Points.after.remove(drawAll);
+Points.after.update(drawAll);
 
 window.addEventListener('DOMContentLoaded', function () {
     var canvas  = document.querySelector('canvas');
@@ -25,12 +24,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     context.fillStyle = 'black';
 
-    canvas.addEventListener('contextmenu', function () {
-        Points.find().map(function (point) {
-            Points.remove(point._id);
-        });
-
-        return false;
+    window.addEventListener('contextmenu', function (event) {
+        Meteor.call('clear');
+        event.preventDefault();
     });
 
     canvas.addEventListener('mouseup', function () {
@@ -38,11 +34,6 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
     canvas.addEventListener('mousedown', function (event) {
-        var mousex = event.pageX - this.offsetLeft;
-        var mousey = event.pageY - this.offsetTop;
-
-        draw(mousex, mousey);
-
         isPainting = true;
     });
 
@@ -59,17 +50,17 @@ window.addEventListener('DOMContentLoaded', function () {
         isPainting = false;
     });
 
-    drawAll = function () {
+    __draw = function () {
         context.clearRect(0, 0, 600, 600);
 
         Points.find().map(function (point) {
             context.beginPath();
-            context.arc(point.x, point.y, 1, 0, 2 * Math.PI, false);
+            context.arc(point.x, point.y, 2, 0, 2 * Math.PI, false);
             context.fill();
         });
     };
 
-    setTimeout(function () {
+    Meteor.subscribe('points', function () {
         drawAll();
-    }, 100);
+    });
 });
