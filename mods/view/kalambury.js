@@ -16,15 +16,6 @@ if (Meteor.isClient) {
         var offset = $canvas.offset();
         var isPainting = false;
 
-        $(window)
-            .resize(function () {
-                offset = $canvas.offset();
-            })
-            .on('contextmenu', function (event) {
-                Points.call('clear');
-                event.preventDefault();
-            });
-
         $canvas
             .mouseup   (function () {isPainting = false;})
             .mousedown (function () {isPainting = true;})

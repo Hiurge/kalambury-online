@@ -2,7 +2,8 @@ Points = new UniCollection('points');
 
 Points.setSchema({
     x: {type: Number},
-    y: {type: Number}
+    y: {type: Number},
+    color: {type: String}
 });
 
 Points.allow({
