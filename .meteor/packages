@@ -6,11 +6,11 @@
 
 meteor-platform
 autopublish
-insecure
 matb33:collection-hooks
 accounts-ui
 accounts-password
 twbs:bootstrap
 kadira:flow-router
 vazco:universe-collection
+kadira:blaze-layout
 mizzao:user-status
