@@ -8,3 +8,7 @@ meteor-platform
 autopublish
 insecure
 matb33:collection-hooks
+accounts-ui
+accounts-password
+twbs:bootstrap
+kadira:flow-router
