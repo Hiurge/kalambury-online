@@ -26,18 +26,22 @@
 </nav>
 
 <div class="container">
-    <div class="panel panel-default">
-        {{> panelHeading}}
-        {{> panelBody}}
-        {{> panelFooter}}
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                {{> panelHeading}}
+                {{> panelBody}}
+                {{> panelFooter}}
             </div>
-            <div class="panel-body">
-                {{> chatList}}
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+
+                </div>
+                <div class="panel-body">
+                    {{> chatList}}
+                </div>
             </div>
         </div>
     </div>
