@@ -7,6 +7,20 @@ canvas {
 }
 
 .chat-list {
-    height: 600px;
+    height: 560px;
     overflow-y: auto;
+}
+
+#chatField {
+    margin-top: 10px;
+}
+
+#login-name-link {
+    line-height: 50px;
+    color: white;
+    padding: 0 10px;
+}
+
+#login-buttons {
+    float: right;
 }
