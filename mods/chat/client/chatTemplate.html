@@ -1,0 +1,9 @@
+<template name="chat">
+	Chat:
+	<table>
+		{{#each getChat}}
+			<tr><b>{{user_id}}</b> - {{message}}</tr>
+			{{log .}}
+		{{/each}}
+	</table>
+</template>
