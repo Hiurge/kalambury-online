@@ -1,4 +1,9 @@
-Points = new Meteor.Collection('points');
+Points = new UniCollection('points');
+
+Points.setSchema({
+    x: {type: Number},
+    y: {type: Number}
+});
 
 Points.allow({
     insert: function () {return true;},
@@ -6,7 +11,7 @@ Points.allow({
     update: function () {return true;}
 });
 
-Meteor.methods({
+Points.methods({
     clear: function () {
         Points.remove({});
     }

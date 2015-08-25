@@ -28,7 +28,7 @@ $(function () {
             offset = $canvas.offset();
         })
         .on('contextmenu', function (event) {
-            Meteor.call('clear');
+            Points.call('clear');
             event.preventDefault();
         });
 

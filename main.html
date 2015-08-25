@@ -24,20 +24,33 @@
         </div>
     </nav>
 
-
     <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3>Kalambury online</h3>
-                    </div>
-                    <div class="panel-body">
-                        <canvas width="600" height="600"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4"></div>
+        <div class="panel panel-default">
+            {{> panelHeading}}
+            {{> panelBody}}
+            {{> panelFooter}}
         </div>
     </div>
 </body>
+
+<template name="panelHeading">
+    <div class="panel-heading text-center">
+        <h3>Kalambury online</h3>
+    </div>
+</template>
+
+<template name="panelBody">
+    <div class="panel-body">
+        <canvas width="600" height="600"></canvas>
+    </div>
+</template>
+
+<template name="panelFooter">
+    <div class="panel-footer text-center">
+        <h3>{{currentWord}}</h3>
+
+        <form>
+            <input type="text" name="word">
+        </form>
+    </div>
+</template>
