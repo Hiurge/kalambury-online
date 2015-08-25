@@ -8,7 +8,8 @@ var run = function () {
     if (!user) {
         var users = UniUsers.find({'status.online': true}).fetch() || [];
         if (users.length) {
-            user = users[_.random(0, users.length - 1)];
+            var lenght = users.length - 1;
+            user = users[lenght ? _.random(0, lenght): 0];
             user.update({$set: {isActive: true}});
             console.log('Active user ', user.getFirstEmailAddress());
             lastUserId = user._id;
